@@ -17,6 +17,8 @@ gem 'webpacker', '~> 4.0'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails', require: 'dotenv/rails-now'
+  gem 'factory_bot_rails'
+  gem 'faker', github: 'stympy/faker', branch: 'master'
   gem 'rspec-rails'
 end
 
