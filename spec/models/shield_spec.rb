@@ -22,4 +22,20 @@ RSpec.describe Shield, type: :model do
       end
     end
   end
+
+  describe 'validations' do
+    subject(:shield) { build(:shield, p10: shot_count) }
+
+    let(:shot_count) { 10 }
+
+    context 'when shot count is 10 or less' do
+      it { is_expected.to be_valid }
+    end
+
+    context 'when shot count is more than 10' do
+      let(:shot_count) { 11 }
+
+      it { is_expected.not_to be_valid }
+    end
+  end
 end

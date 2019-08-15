@@ -6,4 +6,11 @@ class Team < ApplicationRecord
   belongs_to :tournament
   has_many :players, dependent: :delete_all
   accepts_nested_attributes_for :players, allow_destroy: true
+
+  scope :with_points, lambda {
+    includes(:players)
+      .left_joins(players: :shields)
+      .select('teams.*, coalesce(sum(shields.points),0) as team_points')
+      .group(:id)
+  }
 end

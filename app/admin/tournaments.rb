@@ -35,15 +35,18 @@ ActiveAdmin.register Tournament do
       row :start_date
     end
 
-    tournament.teams.includes(:players).order(:name).each_slice(2) do |teams|
+    tournament.teams.with_points.order(:name).each_slice(2) do |teams|
       columns do
         teams.each do |team|
           column do
             panel team.name do
+              attributes_table_for team do
+                row :team_points
+              end
               table_for team.players do
                 column :name
-                column :score
-                column :actions
+                column :points
+                column('Edit') { |p| link_to 'Edit', edit_player_path(p) }
               end
             end
           end
