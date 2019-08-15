@@ -35,7 +35,7 @@ ActiveAdmin.register Tournament do
       row :start_date
     end
 
-    tournament.teams.with_points.order(:name).each_slice(2) do |teams|
+    resource.teams.with_points.order(:name).each_slice(2) do |teams|
       columns do
         teams.each do |team|
           column do
@@ -53,5 +53,13 @@ ActiveAdmin.register Tournament do
         end
       end
     end
+  end
+
+  action_item :individual_classification, only: :show do
+    link_to 'Individual classification', individual_classification_tournament_path(resource)
+  end
+
+  member_action :individual_classification do
+    @players = resource.players.order(points: :desc)
   end
 end
