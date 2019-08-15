@@ -18,7 +18,7 @@ RSpec.describe Shield, type: :model do
 
     describe '.calculate_binary_points' do
       it 'calculates binary points after save' do
-        expect(shield.binary_points).to eq(5410000000)
+        expect(shield.binary_points).to eq(5_410_000_000)
       end
     end
   end
