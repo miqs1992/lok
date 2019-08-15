@@ -4,6 +4,6 @@ FactoryBot.define do
   factory :tournament do
     name { Faker::Sports::Football.competition }
     start_date { Time.current }
-    type { :league }
+    tournament_type { :league }
   end
 end
