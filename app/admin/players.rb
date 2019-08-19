@@ -9,9 +9,7 @@ ActiveAdmin.register Player do
     end
     f.inputs do
       f.has_many :shields, allow_destroy: true do |s|
-        (1..10).each do |i|
-          s.input "p#{i}".to_sym
-        end
+        (1..10).each { |i| s.input "p#{i}".to_sym }
       end
     end
     f.actions
@@ -26,9 +24,7 @@ ActiveAdmin.register Player do
 
     panel 'Scores' do
       table_for player.shields do
-        (1..10).each do |i|
-          column "p#{i}".to_sym
-        end
+        (1..10).each { |i| column "p#{i}".to_sym }
         column :points
       end
     end

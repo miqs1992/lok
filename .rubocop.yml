@@ -10,9 +10,14 @@ AllCops:
     - 'log/**/*'
     - 'node_modules/**/*'
 
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', 'context']
+
 Metrics/LineLength:
   Max: 99
   IgnoredPatterns: ['\A#']
+  Exclude:
+    - 'config/initializers/*.rb'
 
 Style/Documentation:
   Enabled: false
