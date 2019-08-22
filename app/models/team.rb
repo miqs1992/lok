@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class Team < ApplicationRecord
-  validates :name, uniqueness: { scope: :tournament }, presence: true
+  validates :name, presence: true
 
-  belongs_to :tournament
-  has_many :players, dependent: :delete_all
+  has_many :tournament_teams, dependent: :destroy
+  has_many :tournaments, through: :tournament_teams
+  has_many :players, dependent: :destroy
   accepts_nested_attributes_for :players, allow_destroy: true
 
   scope :with_points, lambda {

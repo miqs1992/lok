@@ -3,7 +3,10 @@
 FactoryBot.define do
   factory :team do
     name { Faker::Sports::Football.team }
-    tournament
+
+    after(:create) do |team|
+      create(:tournament).teams << team
+    end
 
     factory :team_with_players do
       after(:create) do |team|

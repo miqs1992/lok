@@ -1,0 +1,28 @@
+# frozen_string_literal: true
+
+div.panel('Tournament Details') do
+  attributes_table_for resource do
+    row :name
+    row :tournament_type
+    row :start_date
+  end
+
+  resource.teams.with_points.order(:name).each_slice(2) do |teams|
+    columns do
+      teams.each do |team|
+        column do
+          panel team.name do
+            attributes_table_for team do
+              row :team_points
+            end
+            table_for team.players do
+              column :name
+              column :points
+              column('Edit') { |p| link_to 'Edit', edit_player_path(p) }
+            end
+          end
+        end
+      end
+    end
+  end
+end
