@@ -21,6 +21,6 @@ class Shield < ApplicationRecord
     shots = (1..10).map { |i| public_send("p#{i}".to_sym) }.sum
     return if shots <= 10
 
-    errors.add(:base, 'Shield can have more than 10 shots')
+    errors.add(:base, "Shield can't have more than 10 shots")
   end
 end

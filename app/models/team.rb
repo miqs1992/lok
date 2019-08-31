@@ -3,8 +3,7 @@
 class Team < ApplicationRecord
   validates :name, presence: true
 
-  has_many :tournament_teams, dependent: :destroy
-  has_many :tournaments, through: :tournament_teams
+  belongs_to :tournament
   has_many :players, dependent: :destroy
   accepts_nested_attributes_for :players, allow_destroy: true
 

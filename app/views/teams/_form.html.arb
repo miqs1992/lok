@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+form.object.tournament_id = params[:tournament_id]
+form.inputs do
+  form.input :tournament_id, as: :hidden
+  form.input :name, include_blank: false
+  form.has_many :players, allow_destroy: true do |p|
+    p.input :name, include_blank: false
+  end
+end
+form.actions

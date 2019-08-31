@@ -4,25 +4,9 @@ ActiveAdmin.register Team do
   belongs_to :tournament
   permit_params :name, players_attributes: %i[name _destroy id]
 
-  form do |f|
-    f.inputs do
-      f.input :name, include_blank: false
-      f.has_many :players, allow_destroy: true do |p|
-        p.input :name, include_blank: false
-      end
-    end
-    f.actions
-  end
+  form { |f| render 'teams/form', form: f }
 
-  controller do
-    def create
-      super do |success, _failure|
-        success.html do
-          tournament = Tournament.find(permitted_params[:tournament_id])
-          tournament.teams << resource
-          redirect_to tournament_path(tournament)
-        end
-      end
-    end
+  action_item :go_to_tournament, only: :show do
+    link_to 'Tournament', tournament_path(resource.tournament)
   end
 end

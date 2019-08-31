@@ -7,10 +7,6 @@ RSpec.describe Team, type: :model do
     expect(create(:team)).to be_valid
   end
 
-  it 'links to tournament' do
-    expect(create(:team).tournaments.count).to eq(1)
-  end
-
   describe ':team_with_players' do
     it 'has valid factory' do
       expect(create(:team_with_players)).to be_valid
