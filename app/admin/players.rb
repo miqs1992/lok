@@ -2,6 +2,7 @@
 
 ActiveAdmin.register Player do
   permit_params :name, shields_attributes: [:id, :_destroy, *(1..10).map { |i| "p#{i}".to_sym }]
+  menu false
 
   form do |f|
     f.inputs do
