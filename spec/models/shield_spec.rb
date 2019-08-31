@@ -24,18 +24,43 @@ RSpec.describe Shield, type: :model do
   end
 
   describe 'validations' do
-    subject(:shield) { build(:shield, p10: shot_count) }
+    describe 'shots limit' do
+      subject(:shield) { build(:shield, p10: shot_count) }
 
-    let(:shot_count) { 10 }
+      let(:shot_count) { 10 }
 
-    context 'when shot count is 10 or less' do
-      it { is_expected.to be_valid }
+      context 'when shot count is 10 or less' do
+        it { is_expected.to be_valid }
+      end
+
+      context 'when shot count is more than 10' do
+        let(:shot_count) { 11 }
+
+        it { is_expected.not_to be_valid }
+      end
     end
 
-    context 'when shot count is more than 10' do
-      let(:shot_count) { 11 }
+    describe 'shields limit' do
+      let(:player) { create(:player) }
+      subject(:shield) { build(:shield, player: player) }
 
-      it { is_expected.not_to be_valid }
+      context 'when tournament is league' do
+        before do
+          player.tournament.league!
+          create_list(:shield, 3, player: player)
+        end
+
+        it { is_expected.not_to be_valid }
+      end
+
+      context 'when tournament is single' do
+        before do
+          player.tournament.single!
+          create(:shield, player: player)
+        end
+
+        it { is_expected.not_to be_valid }
+      end
     end
   end
 end

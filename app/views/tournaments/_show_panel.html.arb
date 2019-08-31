@@ -11,7 +11,7 @@ div.panel('Tournament Details') do
     columns do
       teams.each do |team|
         column do
-          panel team.name do
+          panel link_to(team.name, tournament_team_path(team)) do
             attributes_table_for team do
               row :team_points
             end

@@ -4,6 +4,7 @@ class Shield < ApplicationRecord
   belongs_to :player
   before_save :calculate_points
   validate :shots_limit
+  validate :shields_limit, on: :create
 
   private
 
@@ -21,6 +22,18 @@ class Shield < ApplicationRecord
     shots = (1..10).map { |i| public_send("p#{i}".to_sym) }.sum
     return if shots <= 10
 
-    errors.add(:base, "Shield can't have more than 10 shots")
+    errors.add(:p1, "Shield can't have more than 10 shots")
+  end
+
+  def shields_limit
+    if player.tournament.league?
+      return if player.shields.count < 3
+
+      errors.add(:p1, "Player can't have more than 3 shields")
+    else
+      return if player.shields.count < 1
+
+      errors.add(:p1, "Player can't have more than 1 shield")
+    end
   end
 end

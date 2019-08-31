@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :team do
-    name { Faker::Sports::Football.team }
+    name { Faker::Sports::Football.unique.team }
     tournament
 
     factory :team_with_players do

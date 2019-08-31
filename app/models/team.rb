@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Team < ApplicationRecord
-  validates :name, presence: true
+  validates :name, uniqueness: { scope: :tournament }, presence: true
 
   belongs_to :tournament
   has_many :players, dependent: :destroy
