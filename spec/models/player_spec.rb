@@ -16,4 +16,17 @@ RSpec.describe Player, type: :model do
       end
     end
   end
+
+  describe 'points' do
+    subject(:player) { create(:player) }
+
+    before do
+      player.tournament.league!
+      create_list(:shield, 4, p10: 10, player: player)
+    end
+
+    it 'takes only 3 best shields' do
+      expect(player.points).to eq(300)
+    end
+  end
 end

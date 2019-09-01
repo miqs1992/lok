@@ -16,6 +16,10 @@ ActiveAdmin.register Tournament do
     link_to 'Add team', new_tournament_team_path(resource)
   end
 
+  action_item :go_back, except: :show do
+    link_to 'Go back', tournament_path(resource)
+  end
+
   member_action :individual_classification do
     @players = resource.players.order(points: :desc)
   end

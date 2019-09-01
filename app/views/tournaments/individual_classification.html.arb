@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 panel 'Individual classification' do
-  table_for resource.players.order(points: :desc) do
+  table_for resource.players.by_points do
     column :name
     column :points
   end

@@ -3,10 +3,23 @@
 class Shield < ApplicationRecord
   belongs_to :player
   before_save :calculate_points
+  # after_save :calculate_rank
+
   validate :shots_limit
   validate :shields_limit, on: :create
 
-  private
+  scope :best_3, lambda {
+    with_row_number.where('shields.row_number <= 3')
+  }
+
+  def self.with_row_number
+    from <<-SQL.strip_heredoc
+      (SELECT *, row_number() OVER (
+      PARTITION BY player_id
+      ORDER BY points DESC
+      ) FROM shields) AS shields
+    SQL
+  end
 
   def calculate_points
     self.points = (1..10).map do |i|
@@ -27,9 +40,9 @@ class Shield < ApplicationRecord
 
   def shields_limit
     if player.tournament.league?
-      return if player.shields.count < 3
+      return if player.shields.count < 4
 
-      errors.add(:p1, "Player can't have more than 3 shields")
+      errors.add(:p1, "Player can't have more than 4 shields")
     else
       return if player.shields.count < 1
 

@@ -7,13 +7,13 @@ div.panel('Tournament Details') do
     row :start_date
   end
 
-  resource.teams.with_points.order(:name).each_slice(2) do |teams|
+  resource.teams.order(:name).each_slice(2) do |teams|
     columns do
       teams.each do |team|
         column do
           panel link_to(team.name, tournament_team_path(team)) do
             attributes_table_for team do
-              row :team_points
+              row :points
             end
             table_for team.players do
               column :name

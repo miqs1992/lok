@@ -23,6 +23,14 @@ RSpec.describe Shield, type: :model do
     end
   end
 
+  describe 'with_row_number' do
+    subject(:shield) { create(:shield, p10: 5, p9: 4, p8: 1) }
+
+    it 'assigns rank' do
+      expect(shield.player.shields.with_row_number.first.row_number).to eq(1)
+    end
+  end
+
   describe 'validations' do
     describe 'shots limit' do
       subject(:shield) { build(:shield, p10: shot_count) }
@@ -47,7 +55,7 @@ RSpec.describe Shield, type: :model do
       context 'when tournament is league' do
         before do
           player.tournament.league!
-          create_list(:shield, 3, player: player)
+          create_list(:shield, 4, player: player)
         end
 
         it { is_expected.not_to be_valid }

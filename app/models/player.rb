@@ -8,13 +8,17 @@ class Player < ApplicationRecord
 
   delegate :tournament, to: :team
 
-  default_scope do
-    left_joins(:shields).select('players.*, coalesce(sum(shields.points),0) as points').group(:id)
-  end
+  scope :by_points, lambda {
+    all.sort_by(&:points).reverse
+  }
 
   def players_limit
     return if team.players.unscoped.count < 3
 
     errors.add(:name, "Team can't have more than 3 players")
+  end
+
+  def points
+    shields.best_3.sum(:points)
   end
 end
