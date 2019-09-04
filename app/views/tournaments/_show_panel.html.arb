@@ -6,8 +6,10 @@ div.panel('Tournament Details') do
     row :tournament_type
     row :start_date
   end
+end
 
-  resource.teams.order(:name).each_slice(2) do |teams|
+div.panel('Teams') do
+  resource.teams.includes(players: :shields).order(:name).each_slice(2) do |teams|
     columns do
       teams.each do |team|
         column do
@@ -18,6 +20,7 @@ div.panel('Tournament Details') do
             table_for team.players do
               column :name
               column :points
+              column('Shields') { |p| p.shields.size }
               column('Edit') { |p| link_to 'Edit', edit_player_path(p) }
             end
           end

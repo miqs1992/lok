@@ -10,9 +10,29 @@ class Player < ApplicationRecord
 
   delegate :tournament, to: :team
 
+  scope :individual_classification, lambda {
+    joins(:shields)
+      .includes(:shields)
+      .order(points: :desc, binary_points: :desc)
+      .merge(Shield.order(points: :desc))
+  }
+
   def players_limit
     return if team.players.unscoped.count < 3
 
     errors.add(:name, "Team can't have more than 3 players")
+  end
+
+  def self.to_csv
+    CSV.generate(headers: false) do |csv|
+      csv << ['rank', 'name', *((1..10).map { |i| "p#{i}" }), 'points', 'total']
+
+      all.each_with_index do |player, index|
+        player.shields.each do |shield|
+          shield_points = (1..10).map { |i| shield.public_send("p#{i}") }
+          csv << [index + 1, player.name, *shield_points, shield.points, player.points]
+        end
+      end
+    end
   end
 end

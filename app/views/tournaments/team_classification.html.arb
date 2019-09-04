@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+panel 'Team classification' do
+  table_for resource.teams.includes(:players).ranked do
+    column :rank
+    column :name
+    column :first_player_name
+    column :second_player_name
+    column :third_player_name
+    column :points
+  end
+end
