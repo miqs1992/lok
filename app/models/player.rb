@@ -19,9 +19,9 @@ class Player < ApplicationRecord
   }
 
   def players_limit
-    return if team.players.unscoped.count < 3
+    return if team.players.count < 3
 
-    errors.add(:name, "Team can't have more than 3 players")
+    errors.add(:name, I18n.t('activerecord.errors.players_limit'))
   end
 
   def self.to_csv

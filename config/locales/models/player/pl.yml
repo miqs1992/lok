@@ -11,3 +11,5 @@ pl:
         name: Imię i nazwisko
         points: Punkty
         shields: Tarcze
+    errors:
+      players_limit: Drużyna nie może mieć więcej niż 3 zawodników
