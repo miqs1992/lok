@@ -9,7 +9,7 @@ class Shield < ApplicationRecord
 
   (1..10).map { |i| validates "p#{i}".to_sym, presence: true }
   validate :shots_limit
-  validate :shields_limit, on: :create
+  validate :shields_limit
 
   scope :best_3, lambda {
     with_row_number.where('shields.row_number <= 3')
@@ -45,7 +45,7 @@ class Shield < ApplicationRecord
 
   def shields_limit
     limit = player.tournament.league? ? 4 : 1
-    return if player.shields.count < limit
+    return if player.shields.count < (id ? limit + 1 : limit)
 
     errors.add(:p1, I18n.t('activerecord.errors.shields_limit', limit: limit))
   end

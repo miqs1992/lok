@@ -8,7 +8,7 @@ class Player < ApplicationRecord
   has_many :shields, dependent: :delete_all
   accepts_nested_attributes_for :shields, allow_destroy: true
 
-  validate :players_limit, on: :create
+  validate :players_limit
   validates :name, presence: true
 
   scope :individual_classification, lambda {
@@ -19,7 +19,7 @@ class Player < ApplicationRecord
   }
 
   def players_limit
-    return if team.players.count < 3
+    return if team.players.count < (id ? 4 : 3)
 
     errors.add(:name, I18n.t('activerecord.errors.players_limit'))
   end
