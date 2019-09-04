@@ -2,8 +2,10 @@
 
 class Shield < ApplicationRecord
   belongs_to :player
+  delegate :team, to: :player
+
   before_save :calculate_points
-  # after_save :calculate_rank
+  after_save :calculate_player_and_team
 
   validate :shots_limit
   validate :shields_limit, on: :create
@@ -14,10 +16,7 @@ class Shield < ApplicationRecord
 
   def self.with_row_number
     from <<-SQL.strip_heredoc
-      (SELECT *, row_number() OVER (
-      PARTITION BY player_id
-      ORDER BY points DESC
-      ) FROM shields) AS shields
+      (SELECT *, row_number() OVER (PARTITION BY player_id ORDER BY points DESC) FROM shields) AS shields
     SQL
   end
 
@@ -29,6 +28,11 @@ class Shield < ApplicationRecord
     self.binary_points = (0..9).map do |i|
       public_send("p#{i + 1}".to_sym) * 10**i
     end.sum
+  end
+
+  def calculate_player_and_team
+    player.calculate_points
+    team.calculate_points
   end
 
   def shots_limit

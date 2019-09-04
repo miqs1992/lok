@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+form.inputs do
+  form.input :name, include_blank: false
+end
+form.inputs do
+  form.has_many :shields, allow_destroy: true do |s|
+    (1..10).each { |i| s.input "p#{i}".to_sym }
+  end
+end
+form.actions

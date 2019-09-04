@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_15_091422) do
+ActiveRecord::Schema.define(version: 2019_09_02_172656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,10 @@ ActiveRecord::Schema.define(version: 2019_08_15_091422) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "points", default: 0, null: false
+    t.bigint "binary_points", default: 0, null: false
+    t.index ["binary_points"], name: "index_players_on_binary_points"
+    t.index ["points"], name: "index_players_on_points"
     t.index ["team_id"], name: "index_players_on_team_id"
   end
 
@@ -63,6 +67,10 @@ ActiveRecord::Schema.define(version: 2019_08_15_091422) do
     t.bigint "tournament_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "points", default: 0, null: false
+    t.bigint "binary_points", default: 0, null: false
+    t.index ["binary_points"], name: "index_teams_on_binary_points"
+    t.index ["points"], name: "index_teams_on_points"
     t.index ["tournament_id"], name: "index_teams_on_tournament_id"
   end
 

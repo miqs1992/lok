@@ -21,6 +21,16 @@ RSpec.describe Shield, type: :model do
         expect(shield.binary_points).to eq(5_410_000_000)
       end
     end
+
+    describe 'after save' do
+      it 'calculates player points' do
+        expect(shield.player.points).to eq(94)
+      end
+
+      it 'calculates team points' do
+        expect(shield.team.points).to eq(94)
+      end
+    end
   end
 
   describe 'with_row_number' do
