@@ -6,6 +6,7 @@ class Tournament < ApplicationRecord
 
   has_many :teams, dependent: :destroy
   has_many :players, through: :teams
+  has_many :shields, through: :players
 
   enum tournament_type: { league: 'league', single: 'single' }
 end

@@ -11,6 +11,7 @@ ActiveAdmin.register Player do
       row :name
       row :team
       row :tournament
+      row :points
     end
 
     panel 'Scores' do

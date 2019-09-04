@@ -10,8 +10,8 @@ module Calculable
 
     def calculate_points
       update(
-          points: shields.best_3.sum(:points),
-          binary_points: shields.best_3.sum(:binary_points)
+        points: shields.best_3.sum(:points),
+        binary_points: shields.best_3.sum(:binary_points)
       )
     end
   end

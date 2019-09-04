@@ -16,11 +16,15 @@ ActiveAdmin.register Tournament do
     link_to 'Add team', new_tournament_team_path(resource)
   end
 
-  action_item :go_back, except: :show do
+  action_item :go_back, except: %i[show index] do
     link_to 'Go back', tournament_path(resource)
   end
 
   member_action :individual_classification do
-    @players = resource.players.order(points: :desc)
+    @players = resource.players
+                       .joins(:shields)
+                       .includes(:shields)
+                       .order(points: :desc, binary_points: :desc)
+                       .merge(Shield.order(points: :desc))
   end
 end

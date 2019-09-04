@@ -1,0 +1,8 @@
+<% (1..10).each do |i| %>
+  <td class="col col-p<%= i %>">
+    <%= shield.public_send("p#{i}") %>
+  </td>
+<% end %>
+<td class="col col-shield_points">
+  <%= shield.points %>
+</td>
