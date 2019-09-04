@@ -7,6 +7,7 @@ class Shield < ApplicationRecord
   before_save :calculate_points
   after_save :calculate_player_and_team
 
+  (1..10).map { |i| validates "p#{i}".to_sym, presence: true }
   validate :shots_limit
   validate :shields_limit, on: :create
 
@@ -36,7 +37,7 @@ class Shield < ApplicationRecord
   end
 
   def shots_limit
-    shots = (1..10).map { |i| public_send("p#{i}".to_sym) }.sum
+    shots = (1..10).map { |i| public_send("p#{i}".to_sym) }.compact.sum
     return if shots <= 10
 
     errors.add(:p1, I18n.t('activerecord.errors.shots_limit'))

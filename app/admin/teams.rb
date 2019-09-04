@@ -6,7 +6,7 @@ ActiveAdmin.register Team do
 
   form { |f| render 'teams/form', form: f }
 
-  action_item :go_to_tournament, only: :show do
-    link_to 'Tournament', tournament_path(resource.tournament)
+  action_item :go_back, only: %i[show edit] do
+    link_to I18n.t('active_admin.pages.go_back'), tournament_path(resource.tournament_id)
   end
 end

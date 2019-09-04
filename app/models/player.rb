@@ -4,11 +4,12 @@ class Player < ApplicationRecord
   include Calculable
 
   belongs_to :team
+  delegate :tournament, to: :team
   has_many :shields, dependent: :delete_all
   accepts_nested_attributes_for :shields, allow_destroy: true
-  validate :players_limit, on: :create
 
-  delegate :tournament, to: :team
+  validate :players_limit, on: :create
+  validates :name, presence: true
 
   scope :individual_classification, lambda {
     joins(:shields)
