@@ -39,18 +39,13 @@ class Shield < ApplicationRecord
     shots = (1..10).map { |i| public_send("p#{i}".to_sym) }.sum
     return if shots <= 10
 
-    errors.add(:p1, "Shield can't have more than 10 shots")
+    errors.add(:p1, I18n.t('activerecord.errors.shots_limit'))
   end
 
   def shields_limit
-    if player.tournament.league?
-      return if player.shields.count < 4
+    limit = player.tournament.league? ? 4 : 1
+    return if player.shields.count < limit
 
-      errors.add(:p1, "Player can't have more than 4 shields")
-    else
-      return if player.shields.count < 1
-
-      errors.add(:p1, "Player can't have more than 1 shield")
-    end
+    errors.add(:p1, I18n.t('activerecord.errors.shields_limit', limit: limit))
   end
 end

@@ -1,0 +1,15 @@
+pl:
+  active_admin:
+    new_model: "Dodaj %{model}"
+    actions: Akcje
+    pages:
+      individual_classification: Klasyfikacja indywidualna
+      team_classification: Klasyfikacja drużynowa
+      add_teem: Dodaj drużynę
+      go_back: Powrót do zawodów
+      download_csv: Pobierz CSV
+    classification:
+      rank: Miejsce
+      name: Zawodnik
+      points: Punkty
+      total: Podsumowanie

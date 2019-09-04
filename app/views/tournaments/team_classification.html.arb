@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-panel 'Team classification' do
+panel I18n.t('active_admin.pages.team_classification') do
   table_for resource.teams.includes(:players).ranked do
     column :rank
     column :name

@@ -1,0 +1,14 @@
+pl:
+  activerecord:
+    models:
+      shield:
+        one: Tarcza
+        other: Tarcza
+        few: Tarcz
+        many: Tarcze
+    attributes:
+      shield:
+        points: Punkty
+    errors:
+      shots_limit: Tarcza nie może mieć więcej niż 10 strzałów
+      shields_limit: Uczestnik nie może mięc więcej niż {limit} tarcz

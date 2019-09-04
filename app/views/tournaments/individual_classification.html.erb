@@ -1,16 +1,16 @@
 <div class="panel">
-  <h3>Individual classification</h3>
+  <h3><%= t('active_admin.pages.individual_classification') %></h3>
   <div class="panel_contents">
     <table border="0" cellspacing="0" cellpadding="0">
       <thead>
       <tr>
-        <th class="col col-index">Place</th>
-        <th class="col col-name">Name</th>
+        <th class="col col-index"><%= t('active_admin.classification.rank') %></th>
+        <th class="col col-name"><%= t('active_admin.classification.name') %></th>
         <% (1..10).each do |i| %>
           <th class="col col-p<%= i %>">P<%= i %></th>
         <% end %>
-        <th class="col col-points">Points</th>
-        <th class="col col-total-points">Total points</th>
+        <th class="col col-points"><%= t('active_admin.classification.points') %></th>
+        <th class="col col-total-points"><%= t('active_admin.classification.total') %></th>
       </tr>
       </thead>
       <tbody>

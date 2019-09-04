@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-div.panel('Tournament Details') do
+div.panel(I18n.t('active_admin.details', model: I18n.t('activerecord.models.tournament.few'))) do
   attributes_table_for resource do
     row :name
     row :tournament_type
@@ -8,7 +8,7 @@ div.panel('Tournament Details') do
   end
 end
 
-div.panel('Teams') do
+div.panel(I18n.t('activerecord.models.team.many')) do
   resource.teams.includes(players: :shields).order(:name).each_slice(2) do |teams|
     columns do
       teams.each do |team|
@@ -20,8 +20,10 @@ div.panel('Teams') do
             table_for team.players do
               column :name
               column :points
-              column('Shields') { |p| p.shields.size }
-              column('Edit') { |p| link_to 'Edit', edit_player_path(p) }
+              column(I18n.t('activerecord.attributes.player.shields')) { |p| p.shields.size }
+              column(I18n.t('active_admin.actions')) do |p|
+                link_to I18n.t('active_admin.edit'), edit_player_path(p)
+              end
             end
           end
         end

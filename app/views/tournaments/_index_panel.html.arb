@@ -1,0 +1,7 @@
+# frozen_string_literal: true
+
+div.panel('Tournaments') do
+  table_for Tournament.all.order(start_date: :asc) do
+    column :name
+  end
+end

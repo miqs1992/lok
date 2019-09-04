@@ -1,0 +1,18 @@
+pl:
+  activerecord:
+    models:
+      tournament:
+        one: Zawody
+        other: Zawody
+        few: Zawodów
+        many: Zawody
+    attributes:
+      tournament:
+        name: Nazwa
+        start_date: Data rozpoczęcia
+        tournament_type: Typ
+        teams: Drużyny
+        players: Uczestnicy
+        tournament_types:
+          league: Liga
+          single: Zawody

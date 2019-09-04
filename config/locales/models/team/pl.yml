@@ -1,0 +1,16 @@
+pl:
+  activerecord:
+    models:
+      team:
+        one: Drużyna
+        other: Drużyna
+        few: Drużyn
+        many: Drużyny
+    attributes:
+      team:
+        rank: Miejsce
+        name: Nazwa
+        first_player_name: Pierwszy zawodnik
+        second_player_name: Drugi zawodnik
+        third_player_name: Trzeci zawodnik
+        points: Punkty

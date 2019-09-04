@@ -1,0 +1,13 @@
+pl:
+  activerecord:
+    models:
+      player:
+        one: Uczestnik
+        other: Uczestnika
+        few: Uczestników
+        many: Uczestnicy
+    attributes:
+      player:
+        name: Imię i nazwisko
+        points: Punkty
+        shields: Tarcze

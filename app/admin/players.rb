@@ -21,4 +21,8 @@ ActiveAdmin.register Player do
       end
     end
   end
+
+  action_item :go_back, only: %i[show edit] do
+    link_to I18n.t('active_admin.pages.go_back'), tournament_path(resource.tournament)
+  end
 end

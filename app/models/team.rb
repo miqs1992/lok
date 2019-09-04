@@ -20,7 +20,7 @@ class Team < ApplicationRecord
     attributes = %w[rank name first_player_name second_player_name third_player_name points]
 
     CSV.generate(headers: false) do |csv|
-      csv << attributes
+      csv << attributes.map { |a| I18n.t(a, scope: 'activerecord.attributes.team') }
 
       all.includes(:players).ranked.each do |team|
         csv << attributes.map { |attr| team.public_send(attr) }
