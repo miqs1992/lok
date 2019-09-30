@@ -13,7 +13,7 @@ div.panel(I18n.t('activerecord.models.team.many')) do
     columns do
       teams.each do |team|
         column do
-          panel link_to(team.name, tournament_team_path(team)) do
+          panel auto_link(team) do
             attributes_table_for team do
               row :points
             end
