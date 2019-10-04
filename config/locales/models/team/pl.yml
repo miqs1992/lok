@@ -14,3 +14,7 @@ pl:
         second_player_name: Drugi zawodnik
         third_player_name: Trzeci zawodnik
         points: Punkty
+        tournament: Zawody
+        updated_at: Data aktualizacji
+        created_at: Data utworzenia
+        binary_points: Punkty obliczeniowe
