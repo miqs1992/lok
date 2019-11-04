@@ -11,5 +11,6 @@ pl:
     classification:
       rank: Miejsce
       name: Zawodnik
+      team: Drużyna
       points: Punkty
       total: Podsumowanie

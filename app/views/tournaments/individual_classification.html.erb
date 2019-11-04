@@ -6,6 +6,7 @@
       <tr>
         <th class="col col-index"><%= t('active_admin.classification.rank') %></th>
         <th class="col col-name"><%= t('active_admin.classification.name') %></th>
+        <th class="col col-name"><%= t('active_admin.classification.team') %></th>
         <% (1..10).each do |i| %>
           <th class="col col-p<%= i %>">P<%= i %></th>
         <% end %>
@@ -19,6 +20,7 @@
           <% rowspan = player.shields.size %>
           <td class="col col-place" rowspan="<%=rowspan%>"><%= index + 1 %></td>
           <td class="col col-name" rowspan="<%=rowspan%>"><%= auto_link(player) %></td>
+          <td class="col col-name" rowspan="<%=rowspan%>"><%= auto_link(player.team) %></td>
           <%= render 'shield_data', shield: player.shields[0] %>
           <td class="col col-points" rowspan="<%=rowspan%>"><%= player.points %></td>
         </tr>

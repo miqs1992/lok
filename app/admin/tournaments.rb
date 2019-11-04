@@ -47,7 +47,7 @@ ActiveAdmin.register Tournament do # rubocop:disable Metrics/BlockLength
 
   member_action :individual_classification,
                 title: I18n.t('active_admin.pages.individual_classification') do
-    @players = resource.players.individual_classification
+    @players = resource.players.includes(:team).individual_classification
     respond_to do |format|
       format.html
       format.csv do
