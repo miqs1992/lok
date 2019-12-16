@@ -11,7 +11,7 @@ gem 'activeadmin'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'rubocop-rails'
 gem 'sass-rails', '~> 5'
